@@ -1,0 +1,50 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+
+:root {
+    --primary: #00ff88;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.navbar-brand span {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #0f172a, #1e2937);
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background: #00ff88;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.friend-card {
+    transition: all 0.3s ease;
+}
+
+.friend-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 25px -5px rgb(0 255 136 / 0.3);
+}
+
+.leaflet-popup-content-wrapper {
+    background: #1e2937;
+    color: white;
+    border-radius: 12px;
+}
+
+.leaflet-popup-tip {
+    background: #1e2937;
+}
