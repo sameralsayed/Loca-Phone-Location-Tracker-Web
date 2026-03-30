@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Loca Phone Location Tracker Web – Real-time family &amp; friends GPS tracker. Share live location, set geofences, send SOS alerts, view satellite maps, and track loved ones instantly. Sleek, fast, and fully functional demo. Works perfectly on mobile, tablet &amp; desktop.">
+    <meta name="keywords" content="phone location tracker, loca tracker, family locator, gps tracker web, real-time location sharing, geofence alerts, sos emergency, phone tracker, live gps map, family safety app">
+    <meta name="author" content="SAMER SAEID">
+    <meta name="robots" content="index, follow">
+    <title>Loca Phone Location Tracker Web | Find Family &amp; Friends Live</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://yourdomain.com/loca-phone-tracker-web">
+</head>
+<body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold fs-3" href="#">
+                📍 <span class="ms-2">Loca Tracker</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#map">Live Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#friends">Friends</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#geofence">Geofences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sos">SOS</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Dashboard -->
+    <section class="bg-gradient py-4">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="display-6 fw-bold mb-0">📍 Live Location</h1>
+                    <p class="text-success mb-0" id="my-location-name">📍 You • Zürich, Switzerland</p>
+                </div>
+                <div class="text-end">
+                    <button onclick="shareMyLocation()" class="btn btn-success btn-sm px-4">Share My Location</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Map -->
+    <section id="map" class="py-3">
+        <div class="container-fluid px-0">
+            <div id="map-container" style="height: 520px; position: relative;">
+                <div id="map" class="w-100 h-100"></div>
+                
+                <!-- Map Controls -->
+                <div class="position-absolute top-0 end-0 m-3 bg-dark rounded-4 shadow p-2 d-flex flex-column gap-2">
+                    <button onclick="toggleMapLayer()" class="btn btn-sm btn-outline-light" id="layer-btn">🛰️ Satellite</button>
+                    <button onclick="centerMyLocation()" class="btn btn-sm btn-outline-light">📍 My Location</button>
+                </div>
+                
+                <!-- Live tracking indicator -->
+                <div class="position-absolute bottom-0 start-0 m-3 bg-success text-white px-3 py-1 rounded-pill d-flex align-items-center gap-2 shadow-sm">
+                    <div class="live-dot"></div>
+                    LIVE TRACKING
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Friends Section -->
+    <section id="friends" class="py-5 bg-black">
+        <div class="container">
+            <h2 class="text-center mb-4">👥 Tracked Friends &amp; Family</h2>
+            <div id="friends-list" class="row g-4"></div>
+        </div>
+    </section>
+
+    <!-- Geofences -->
+    <section id="geofence" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">🛡️ Active Geofences</h2>
+            <div class="card bg-dark border-success mx-auto" style="max-width: 520px;">
+                <div class="card-body">
+                    <button onclick="createGeofence()" class="btn btn-success w-100 mb-4">+ Create New Safety Zone</button>
+                    <div id="geofence-list" class="list-group"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOS -->
+    <section id="sos" class="py-5 bg-black text-center">
+        <div class="container">
+            <div class="mx-auto" style="max-width: 420px;">
+                <h2 class="mb-3 text-danger">🚨 SOS Emergency</h2>
+                <p class="text-muted mb-4">One tap to alert all tracked contacts with your exact location</p>
+                <button onclick="triggerSOS()" class="btn btn-danger btn-lg w-100 py-4 fs-3 fw-bold rounded-circle shadow-lg" style="width: 180px; height: 180px; border-radius: 50%;">
+                    SOS
+                </button>
+                <p class="small text-muted mt-4">Your location will be sent instantly to family &amp; friends</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-4 border-top border-success">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <div>
+                    <p class="mb-0 small">© Copyright SAMER SAEID. All Rights Reserved.</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span>Made by ♥️</span>
+                    <a href="https://bio.link/samer" target="_blank" class="text-decoration-none text-light fw-bold">SAMER SAEID</a>
+                </div>
+                <div class="small text-muted">
+                    Mobile-First • SEO Optimized • Works Everywhere
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-1H217gwSVyLSIfH9d9eN7uGygka4Z4N0z0J5Z9p4Z5z5z5z5z5z5z5z5z5z5z5z5" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0q6eY7y2KzqY0QbT0b9y5k5z5z5z5z5z5" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
